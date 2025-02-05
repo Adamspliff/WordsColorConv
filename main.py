@@ -1,163 +1,200 @@
 import tkinter as tk
 import tkinter.ttk as ttk
-from tkinter import messagebox
+#from tkinter import messagebox
 import random
 
-def getNumbers(text):
+def get_numbers(text):
             
     
-    hex=["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"]
+    hexa="0123456789ABCDEF"
     color = []
     n=0
-    hexcolor="#"
+    hexacolor="#"
     #rgb =()
 
     for i in text:
         i = i.upper()
-        if i in hex and n < 6:
-            color.append(hex.index(i))
-            hexcolor += i
+        if i in hexa and n < 6:
+            color.append(hexa.index(i))
+            hexacolor += i
             n+=1
     
     if len(color) < 6:
         for i in range(0, 6 - len(color)):
             color.append(0)
-            hexcolor += "0"
+            hexacolor += "0"
             n+=1
         else:
             pass
 
-    r = 16 * color[0] + color[1] #r =int(hex[0:2],16)
+    r = 16 * color[0] + color[1] #r =int(hexa[0:2],16)
     g = 16 * color[2] + color[3]
     b = 16 * color[4] + color[5]
 
-    rgb = (f"({r},{g},{b})")
+    rgb = f"({r},{g},{b})"
 
-    return rgb, hexcolor
-        
-
-        
-
-def main():
+    return rgb, hexacolor
 
 
-    def clear():
 
-        colors_entry.delete(0,"end")
-        text_entry.delete(0,"end")
-        text_entry.config(background="white")
-        
-        colors_entry2.delete(0,"end")
-        text_entry2.delete(0,"end")
-        text_entry2.config(background="white")
+def clear():
 
-        colors_entry3.delete(0,"end")
-        text_entry3.delete(0,"end")
-        text_entry3.config(background="white")
+    colors_entry.config(state="normal")
+    colors_entry.delete(0,"end")
+    colors_entry.config(state="readonly")
+    text_entry.delete(0,"end")
+    text_entry.config(background="white")
 
-        header.config(background="#f1e1e1",text="Words into color")
-        root.configure(background="#F0F0F0")
-        text_label.configure(background="#f1e1e1")
-        entry_label.configure(background="#f1e1e1")
-        text_label2.configure(background="#f1e1e1")
-        entry_label2.configure(background="#f1e1e1")
-        text_label3.configure(background="#f1e1e1")
-        entry_label3.configure(background="#f1e1e1")
-    
+    colors_entry2.config(state="normal")
+    colors_entry2.delete(0,"end")
+    colors_entry2.config(state="readonly")
+    text_entry2.delete(0,"end")
+    text_entry2.config(background="white")
 
-        
-    def get_entry_value():
+    colors_entry3.config(state="normal")
+    colors_entry3.delete(0,"end")
+    colors_entry3.config(state="readonly")
+    text_entry3.delete(0,"end")
+    text_entry3.config(background="white")
 
-        text = text_entry.get()
-        text2 = text_entry2.get()
-        text3 = text_entry3.get()
-
-        rgb,hexcolor = getNumbers(text)
-        rgb2,hexcolor2 = getNumbers(text2)
-        rgb3,hexcolor3 = getNumbers(text3)
-
-        text_entry.config(background=hexcolor)
-        text_entry2.config(background=hexcolor2)
-        text_entry3.config(background=hexcolor3)
-
-        colors_entry.insert(0,rgb)
-        colors_entry2.insert(0,rgb2)
-        colors_entry3.insert(0,rgb3)
-    
-    def action():
-
-        header.config(background=f"#{random.randint(0,255):02x}{random.randint(0,255):02x}{random.randint(0,255):02x}",text="All the colors!")
-        root.configure(background=f"#{random.randint(0,255):02x}{random.randint(0,255):02x}{random.randint(0,255):02x}")
-        text_label.configure(background=f"#{random.randint(0,255):02x}{random.randint(0,255):02x}{random.randint(0,255):02x}")
-        entry_label.configure(background=f"#{random.randint(0,255):02x}{random.randint(0,255):02x}{random.randint(0,255):02x}")
-        text_label2.configure(background=f"#{random.randint(0,255):02x}{random.randint(0,255):02x}{random.randint(0,255):02x}")
-        entry_label2.configure(background=f"#{random.randint(0,255):02x}{random.randint(0,255):02x}{random.randint(0,255):02x}")
-        text_label3.configure(background=f"#{random.randint(0,255):02x}{random.randint(0,255):02x}{random.randint(0,255):02x}")
-        entry_label3.configure(background=f"#{random.randint(0,255):02x}{random.randint(0,255):02x}{random.randint(0,255):02x}")
-    
-    
-    root = tk.Tk()
-    root.title("WordsColorConv")
-    root.geometry("400x600")
-    root.resizable(True, True)
+    header.config(background="#f1e1e1",text="Words into color")
     root.configure(background="#f1e1e1")
-    style = ttk.Style()
-    style.theme_use("default")
-    
-    header = ttk.Label(root, width=40, text="Words into color:", font=("Lato",14))
-    header.pack()
+    text_label.configure(background="#f1e1e1")
+    entry_label.configure(background="#f1e1e1")
+    text_label2.configure(background="#f1e1e1")
+    entry_label2.configure(background="#f1e1e1")
+    text_label3.configure(background="#f1e1e1")
+    entry_label3.configure(background="#f1e1e1")
 
-    text_label = ttk.Label(root, width=40, text="Text 1:", font=("Lato",14))
-    text_label.pack()
-
-    text_entry = tk.Entry(root, width=40, font=("Lato",14))
-    text_entry.pack()
-    
-    entry_label = ttk.Label(root, width=40, text="Colorcode 1:", font=("Lato",14))
-    entry_label.pack()
-
-    colors_entry = ttk.Entry(root, width=40, font=("Lato",14))
-    colors_entry.pack()
-
-    text_label2 = ttk.Label(root, width=40, text="Text 2:", font=("Lato",14))
-    text_label2.pack()
-
-    text_entry2 = tk.Entry(root, width=40,font=("Lato",14))
-    text_entry2.pack()
-    
-    entry_label2 = ttk.Label(root, width=40, text="Colorcode 2:", font=("Lato",14))
-    entry_label2.pack()
-    
-    colors_entry2 = ttk.Entry(root, width=40, font=("Lato",14))
-    colors_entry2.pack()
-
-    text_label3 = ttk.Label(root, width=40, text="Text 3:", font=("Lato",14))
-    text_label3.pack()
-
-    text_entry3 = tk.Entry(root, width=40,font=("Lato",14))
-    text_entry3.pack()
-
-    entry_label3 = ttk.Label(root, width=40, text="Colorcode 3:", font=("Lato",14))
-    entry_label3.pack()
-    
-    colors_entry3 = ttk.Entry(root, width=40, font=("Lato",14))
-    colors_entry3.pack()
-    
-
-    getColors_button = ttk.Button(root, width=40, text="Colors", command=get_entry_value)
-    getColors_button.pack()
-
-    clear_button = ttk.Button(root, width=40, text="Clear", command=clear)
-    clear_button.pack()
-
-    close_button = ttk.Button(root, width=40, text="Close",command=root.destroy)
-    close_button.pack()
-
-    action_button = ttk.Button(root, width=40, text="Action!",command=action)
-    action_button.pack()
+    label.configure(background="#f1e1e1")
+    label2.configure(background="#f1e1e1")
 
 
-    root.mainloop()
 
-if __name__ == "__main__":
-    main()
+
+def get_entry_value():
+
+    text = text_entry.get()
+    text2 = text_entry2.get()
+    text3 = text_entry3.get()
+
+    if len(text) != 0:
+        rgb, hexacolor = get_numbers(text)
+        text_entry.config(background=hexacolor)
+        colors_entry.config(state="normal")
+        colors_entry.insert(0, rgb)
+        colors_entry.config(state="readonly")
+
+    if len(text2) != 0:
+        rgb2, hexacolor2 = get_numbers(text2)
+        text_entry2.config(background=hexacolor2)
+        colors_entry2.config(state="normal")
+        colors_entry2.insert(0, rgb2)
+        colors_entry2.config(state="readonly")
+
+    if len(text3) != 0:
+        rgb3, hexacolor3 = get_numbers(text3)
+        text_entry3.config(background=hexacolor3)
+        colors_entry3.config(state="normal")
+        colors_entry3.insert(0, rgb3)
+        colors_entry3.config(state="readonly")
+
+
+
+def action():
+
+    header.config(background=f"#{random.randint(0,255):02x}{random.randint(0,255):02x}{random.randint(0,255):02x}",text="All the colors!")
+    root.configure(background=f"#{random.randint(0,255):02x}{random.randint(0,255):02x}{random.randint(0,255):02x}")
+
+    text_label.configure(background=f"#{random.randint(0,255):02x}{random.randint(0,255):02x}{random.randint(0,255):02x}")
+    entry_label.configure(background=f"#{random.randint(0,255):02x}{random.randint(0,255):02x}{random.randint(0,255):02x}")
+
+    text_label2.configure(background=f"#{random.randint(0,255):02x}{random.randint(0,255):02x}{random.randint(0,255):02x}")
+    entry_label2.configure(background=f"#{random.randint(0,255):02x}{random.randint(0,255):02x}{random.randint(0,255):02x}")
+
+    text_label3.configure(background=f"#{random.randint(0,255):02x}{random.randint(0,255):02x}{random.randint(0,255):02x}")
+    entry_label3.configure(background=f"#{random.randint(0,255):02x}{random.randint(0,255):02x}{random.randint(0,255):02x}")
+
+    label.configure(background=f"#{random.randint(0, 255):02x}{random.randint(0, 255):02x}{random.randint(0, 255):02x}")
+    label2.configure(background=f"#{random.randint(0, 255):02x}{random.randint(0, 255):02x}{random.randint(0, 255):02x}")
+
+    text_entry.config(background=f"#{random.randint(0, 255):02x}{random.randint(0, 255):02x}{random.randint(0, 255):02x}")
+    text_entry2.config(background=f"#{random.randint(0, 255):02x}{random.randint(0, 255):02x}{random.randint(0, 255):02x}")
+    text_entry3.config(background=f"#{random.randint(0, 255):02x}{random.randint(0, 255):02x}{random.randint(0, 255):02x}")
+
+
+#-------------------Main Window
+root = tk.Tk()
+root.title("WordsColorConv")
+root.geometry("900x1000")
+root.resizable(True, True)
+root.configure(background="#f1e1e1")
+style = ttk.Style()
+style.theme_use("default")
+
+
+#-------------------Labels/Entries
+
+header = ttk.Label(root, width=40, text="Words into color", font=("Lato",22),anchor="center",background="#f1e1e1")
+header.grid(row=0,column=0, columnspan=2)
+
+label = ttk.Label(root,width=106, anchor="center", background="#f1e1e1", font=("Lato",9))
+label.grid(row=1,column=0, columnspan=2)
+
+text_label = ttk.Label(root, width=40, text="Text 1:", font=("Lato",14), background="#f1e1e1")
+text_label.grid(row=2,column=0)
+
+text_entry = tk.Entry(root, width=40, font=("Lato",14))
+text_entry.grid(row=3,column=0)
+
+entry_label = ttk.Label(root, width=40, text="Colorcode 1:", font=("Lato",14), background="#f1e1e1")
+entry_label.grid(row=2,column=1)
+
+colors_entry = ttk.Entry(root, width=40, font=("Lato",14), state="readonly")
+colors_entry.grid(row=3,column=1)
+
+text_label2 = ttk.Label(root, width=40, text="Text 2:", font=("Lato",14), background="#f1e1e1")
+text_label2.grid(row=4,column=0)
+
+text_entry2 = tk.Entry(root, width=40,font=("Lato",14))
+text_entry2.grid(row=5,column=0)
+
+entry_label2 = ttk.Label(root, width=40, text="Colorcode 2:", font=("Lato",14), background="#f1e1e1")
+entry_label2.grid(row=4,column=1)
+
+colors_entry2 = ttk.Entry(root, width=40, font=("Lato",14), state="readonly")
+colors_entry2.grid(row=5,column=1)
+
+text_label3 = ttk.Label(root, width=40, text="Text 3:", font=("Lato",14), background="#f1e1e1")
+text_label3.grid(row=6,column=0)
+
+text_entry3 = tk.Entry(root, width=40,font=("Lato",14))
+text_entry3.grid(row=7,column=0)
+
+entry_label3 = ttk.Label(root, width=40, text="Colorcode 3:", font=("Lato",14), background="#f1e1e1")
+entry_label3.grid(row=6, column=1)
+
+colors_entry3 = ttk.Entry(root, width=40, font=("Lato",14), state="readonly")
+colors_entry3.grid(row=7,column=1)
+
+label2 = ttk.Label(root, width=106, text="How to: Please enter strings and they will be converted to colors!", anchor="center", background="#f1e1e1", font=("Lato", 9))
+label2.grid(row=12, column=0, columnspan=2)
+
+# ________________ Buttons
+
+get_colors_button = ttk.Button(root, width=40, text="Colors", command=get_entry_value)
+get_colors_button.grid(row=8,column=0,columnspan=2)
+
+clear_button = ttk.Button(root, width=40, text="Clear", command=clear)
+clear_button.grid(row=9,column=0, columnspan=2)
+
+close_button = ttk.Button(root, width=40, text="Close",command=root.destroy)
+close_button.grid(row=10,column=0, columnspan=2)
+
+action_button = ttk.Button(root, width=40, text="Action!",command=action)
+action_button.grid(row=11,column=0, columnspan=2)
+
+
+
+root.mainloop()
+
